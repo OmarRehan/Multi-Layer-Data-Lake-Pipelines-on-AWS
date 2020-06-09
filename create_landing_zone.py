@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s: %(levelname)s: %(me
 
 if __name__ == '__main__':
 
-    spark = initialize_spark_session()
+    spark = initialize_spark_session('create_landing_zone')
 
     config = read_configs_file()
 

@@ -11,3 +11,10 @@ Building DWH Layers to serve as consolidated source for data analytics and predi
 - Landing layer is where all external tables are created to read from src files on Edge node
 - staging layer is where a 3NF model is created with consistent schema & curated data
 - conformed layer is where Anlytical, Reporting & Data science tables created for different use cases
+
+### Environment setup/requiremetns:-
+-------------
+- Ubuntu/*nix OS
+- Spark binaries 
+
+- delta lake jar

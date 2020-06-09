@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Flight-DWH-for-Data-Analytics-and-Predictive-Modeling.iml" filepath="$PROJECT_DIR$/.idea/Flight-DWH-for-Data-Analytics-and-Predictive-Modeling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../General/GeneralPythonCode/.idea/GeneralPythonCode.iml" filepath="$PROJECT_DIR$/../../General/GeneralPythonCode/.idea/GeneralPythonCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../PySpark/.idea/PySpark.iml" filepath="$PROJECT_DIR$/../../PySpark/.idea/PySpark.iml" />
     </modules>
   </component>
 </project>
