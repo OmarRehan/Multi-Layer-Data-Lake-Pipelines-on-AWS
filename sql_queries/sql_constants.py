@@ -1,7 +1,7 @@
 dict_dbs_names = {
     'LANDING_ZONE_NAME': 'LANDING_ZONE',
-    'INTEGRATION_LAYER_NAME':'INTEGRATION_LAYER',
-    'PRESENTATION_LAYER_NAME':'PRESENTATION_LAYER'
+    'INTEGRATION_LAYER_NAME': 'INTEGRATION_LAYER',
+    'PRESENTATION_LAYER_NAME': 'PRESENTATION_LAYER'
 }
 
 dict_dbs_locations = {
@@ -10,3 +10,5 @@ dict_dbs_locations = {
     'PRESENTATION_LAYER_LOC': 'hdfs://localhost:9000/FLIGHTS_DL/PRESENTATION_LAYER'
 }
 
+missing_val_replace_numeric = -9999
+missing_val_replace_alphanumeric = '~UNKNOWN~'

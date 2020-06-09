@@ -257,7 +257,7 @@ schema_flights = StructType(
     ]
 )
 
-dict_integration_layer_schemas = {
+dict_integration_layer_tables = {
     'L_AIRLINE_ID': schema_l_airline_id,
     'L_DEPARRBLK': schema_l_deparrblk,
     'L_STATE_FIPS': schema_l_state_fips,

@@ -1,5 +1,5 @@
 import logging
-from sql_queries.integration_layer_ddl import ddl_create_integration_layer_db, dict_integration_layer_schemas
+from sql_queries.integration_layer_ddl import ddl_create_integration_layer_db, dict_integration_layer_tables
 from sql_queries.sql_constants import dict_dbs_locations, dict_dbs_names
 from helper_functions.initialize_spark_session import initialize_spark_session
 from helper_functions.read_configs_file import read_configs_file
@@ -7,10 +7,12 @@ import os
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s: %(levelname)s: %(message)s ")
 
-if __name__ == '__main__':
+# TODO : Partition Flights Table on Year Month basis
 
+if __name__ == '__main__':
     spark = initialize_spark_session('create_integration_layer')
-    # from delta.tables import *
+
+    from delta.tables import *
 
     config = read_configs_file()
 
@@ -32,7 +34,7 @@ if __name__ == '__main__':
     # creating integration_layer tables
     try:
         # Looping over the spark schemas to create them in HDFS
-        for table_name, table_schema in dict_integration_layer_schemas.items():
+        for table_name, table_schema in dict_integration_layer_tables.items():
             table_loc = os.path.join(db_loc, table_name)
 
             # An empty df with a table schema to save it as delta, as current delta supports creating tables using dataframe syntax only

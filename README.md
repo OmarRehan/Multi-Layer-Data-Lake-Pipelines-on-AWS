@@ -18,3 +18,11 @@ Building DWH Layers to serve as consolidated source for data analytics and predi
 - Spark binaries 
 
 - delta lake jar
+
+### Data Loading strategies :-
+-----------
+Landing zone : overwrite insert, as it contains only the most recent loaded data
+Integration Zone : for Lookups Merge, for Facts Delete Insert, as each month should be loaded individually, and should be loaded once, also fact tables should be paritioned
+
+
+- EC2 Deployment ?
