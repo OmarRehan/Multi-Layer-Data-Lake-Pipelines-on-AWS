@@ -10,5 +10,7 @@ dict_dbs_locations = {
     'PRESENTATION_LAYER_LOC': 'hdfs://localhost:9000/FLIGHTS_DL/PRESENTATION_LAYER'
 }
 
+edge_node_path = '/home/admin_123/Desktop/Main/DataSets/FlightsData/'
+
 missing_val_replace_numeric = -9999
 missing_val_replace_alphanumeric = '~UNKNOWN~'

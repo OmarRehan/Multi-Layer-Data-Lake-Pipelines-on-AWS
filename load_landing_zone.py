@@ -1,8 +1,7 @@
 import logging
 from helper_functions.initialize_spark_session import initialize_spark_session
-from helper_functions.read_configs_file import read_configs_file
 from pyspark.sql.types import StructField, StructType, StringType
-from sql_queries.sql_constants import dict_dbs_locations
+from sql_queries.sql_constants import dict_dbs_locations,edge_node_path
 from sql_queries.landing_zone_ddl import list_landing_zone_standard_lookups
 from helper_functions.zip_csv_to_gzip_parquet import zip_csv_to_gzip_parquet
 from helper_functions.loop_files import loop_files
@@ -14,10 +13,6 @@ if __name__ == '__main__':
 
     # Initializing a Spark session
     spark = initialize_spark_session('load_landing_zone')
-
-    config = read_configs_file()
-
-    edge_node_path = config.get('PATH', 'edge_node_path')
 
     landing_zone_location = dict_dbs_locations.get('LANDING_ZONE_LOC')
 

@@ -7,7 +7,7 @@ def zip_csv_to_gzip_parquet(file_path):
     Function to read compresses CSV File into a pandas dataframe then transforms the data into parquet with GZIP compression to be suitable for spark
     Finally the src file is Deleted, this should be changed to archiving not deletion
     """
-    # TODO replace Deletion part with arching strategy
+    # TODO replace Deletion part with archiving strategy
 
     df = pd.read_csv(file_path, compression='zip',low_memory=False)
 

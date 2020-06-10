@@ -2,15 +2,12 @@ import logging
 from sql_queries.landing_zone_ddl import ddl_create_land_zone_db,dict_landing_zone_ddls
 from sql_queries.sql_constants import dict_dbs_locations, dict_dbs_names
 from helper_functions.initialize_spark_session import initialize_spark_session
-from helper_functions.read_configs_file import read_configs_file
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s: %(levelname)s: %(message)s ")
 
 if __name__ == '__main__':
 
     spark = initialize_spark_session('create_landing_zone')
-
-    config = read_configs_file()
 
     # Creating the landing_zone database in spark sql
     try:

@@ -257,7 +257,7 @@ schema_flights = StructType(
     ]
 )
 
-dict_integration_layer_tables = {
+dict_integration_layer_standard_lookups = {
     'L_AIRLINE_ID': schema_l_airline_id,
     'L_DEPARRBLK': schema_l_deparrblk,
     'L_STATE_FIPS': schema_l_state_fips,
@@ -276,31 +276,8 @@ dict_integration_layer_tables = {
     'L_ONTIME_DELAY_GROUPS': schema_l_ontime_delay_groups,
     'L_YESNO_RESP': schema_l_yesno_resp,
     'L_CARRIER_HISTORY': schema_l_carrier_history,
-    'L_QUARTERS': schema_l_quarters,
-    'FLIGHTS': schema_flights
+    'L_QUARTERS': schema_l_quarters
 }
-
-list_integration_layer_standard_lookups = [
-    'L_AIRLINE_ID',
-    'L_DEPARRBLK',
-    'L_STATE_FIPS',
-    'L_AIRPORT',
-    'L_AIRPORT_ID',
-    'L_AIRPORT_SEQ_ID',
-    'L_CANCELLATION',
-    'L_MONTHS',
-    'L_WORLD_AREA_CODES',
-    'L_WEEKDAYS',
-    'L_DIVERSIONS',
-    'L_DISTANCE_GROUP_250',
-    'L_UNIQUE_CARRIERS',
-    'L_STATE_ABR_AVIATION',
-    'L_CITY_MARKET_ID',
-    'L_ONTIME_DELAY_GROUPS',
-    'L_YESNO_RESP',
-    'L_CARRIER_HISTORY',
-    'L_QUARTERS'
-]
 
 list_integration_layer_facts = [
     'FLIGHTS'
