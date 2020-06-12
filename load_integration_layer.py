@@ -55,38 +55,38 @@ def load_l_airport_id(spark, integration_layer_loc, landing_zone_name):
         .execute()
 
 
-def load_l_airport_seq_id(spark, integration_layer_loc, landing_zone_name):
-    delta_l_airport_seq_id = DeltaTable.forPath(spark, integration_layer_loc + '/L_AIRPORT_SEQ_ID')
+# def load_l_airport_seq_id(spark, integration_layer_loc, landing_zone_name):
+#     delta_l_airport_seq_id = DeltaTable.forPath(spark, integration_layer_loc + '/L_AIRPORT_SEQ_ID')
+#
+#     df_LZ_l_airport_seq_id = spark.sql(f"""
+#         SELECT
+#         CAST(CODE AS INTEGER) AS CODE
+#         ,DESCRIPTION
+#         FROM {landing_zone_name}.L_AIRPORT_SEQ_ID
+#     """)
+#
+#     delta_l_airport_seq_id.alias("oldData") \
+#         .merge(df_LZ_l_airport_seq_id.alias("newData"), "oldData.CODE = newData.CODE") \
+#         .whenMatchedUpdate(set={"DESCRIPTION": col("newData.DESCRIPTION")}) \
+#         .whenNotMatchedInsert(values={"CODE": col("newData.CODE"), "DESCRIPTION": col("newData.DESCRIPTION")}) \
+#         .execute()
 
-    df_LZ_l_airport_seq_id = spark.sql(f"""
-        SELECT 
-        CAST(CODE AS INTEGER) AS CODE
-        ,DESCRIPTION
-        FROM {landing_zone_name}.L_AIRPORT_SEQ_ID
-    """)
 
-    delta_l_airport_seq_id.alias("oldData") \
-        .merge(df_LZ_l_airport_seq_id.alias("newData"), "oldData.CODE = newData.CODE") \
-        .whenMatchedUpdate(set={"DESCRIPTION": col("newData.DESCRIPTION")}) \
-        .whenNotMatchedInsert(values={"CODE": col("newData.CODE"), "DESCRIPTION": col("newData.DESCRIPTION")}) \
-        .execute()
-
-
-def load_l_cancellation(spark, integration_layer_loc, landing_zone_name):
-    delta_l_cancellation = DeltaTable.forPath(spark, integration_layer_loc + '/L_CANCELLATION')
-
-    df_LZ_l_cancellation = spark.sql(f"""
-        SELECT 
-        CODE
-        ,DESCRIPTION
-        FROM {landing_zone_name}.L_CANCELLATION
-    """)
-
-    delta_l_cancellation.alias("oldData") \
-        .merge(df_LZ_l_cancellation.alias("newData"), "oldData.CODE = newData.CODE") \
-        .whenMatchedUpdate(set={"DESCRIPTION": col("newData.DESCRIPTION")}) \
-        .whenNotMatchedInsert(values={"CODE": col("newData.CODE"), "DESCRIPTION": col("newData.DESCRIPTION")}) \
-        .execute()
+# def load_l_cancellation(spark, integration_layer_loc, landing_zone_name):
+#     delta_l_cancellation = DeltaTable.forPath(spark, integration_layer_loc + '/L_CANCELLATION')
+#
+#     df_LZ_l_cancellation = spark.sql(f"""
+#         SELECT
+#         CAST(CODE AS INTEGER) AS CODE
+#         ,DESCRIPTION
+#         FROM {landing_zone_name}.L_CANCELLATION
+#     """)
+#
+#     delta_l_cancellation.alias("oldData") \
+#         .merge(df_LZ_l_cancellation.alias("newData"), "oldData.CODE = newData.CODE") \
+#         .whenMatchedUpdate(set={"DESCRIPTION": col("newData.DESCRIPTION")}) \
+#         .whenNotMatchedInsert(values={"CODE": col("newData.CODE"), "DESCRIPTION": col("newData.DESCRIPTION")}) \
+#         .execute()
 
 
 def load_l_carrier_history(spark, integration_layer_loc, landing_zone_name):
@@ -243,38 +243,38 @@ def load_l_quarters(spark, integration_layer_loc, landing_zone_name):
         .execute()
 
 
-def load_l_state_abr_aviation(spark, integration_layer_loc, landing_zone_name):
-    delta_l_state_abr_aviation = DeltaTable.forPath(spark, integration_layer_loc + '/L_STATE_ABR_AVIATION')
+# def load_l_state_abr_aviation(spark, integration_layer_loc, landing_zone_name):
+#     delta_l_state_abr_aviation = DeltaTable.forPath(spark, integration_layer_loc + '/L_STATE_ABR_AVIATION')
+#
+#     df_LZ_l_state_abr_aviation = spark.sql(f"""
+#         SELECT
+#         CODE
+#         ,DESCRIPTION
+#         FROM {landing_zone_name}.L_STATE_ABR_AVIATION
+#     """)
+#
+#     delta_l_state_abr_aviation.alias("oldData") \
+#         .merge(df_LZ_l_state_abr_aviation.alias("newData"), "oldData.CODE = newData.CODE") \
+#         .whenMatchedUpdate(set={"DESCRIPTION": col("newData.DESCRIPTION")}) \
+#         .whenNotMatchedInsert(values={"CODE": col("newData.CODE"), "DESCRIPTION": col("newData.DESCRIPTION")}) \
+#         .execute()
 
-    df_LZ_l_state_abr_aviation = spark.sql(f"""
-        SELECT 
-        CODE
-        ,DESCRIPTION
-        FROM {landing_zone_name}.L_STATE_ABR_AVIATION
-    """)
 
-    delta_l_state_abr_aviation.alias("oldData") \
-        .merge(df_LZ_l_state_abr_aviation.alias("newData"), "oldData.CODE = newData.CODE") \
-        .whenMatchedUpdate(set={"DESCRIPTION": col("newData.DESCRIPTION")}) \
-        .whenNotMatchedInsert(values={"CODE": col("newData.CODE"), "DESCRIPTION": col("newData.DESCRIPTION")}) \
-        .execute()
-
-
-def load_l_state_fips(spark, integration_layer_loc, landing_zone_name):
-    delta_l_state_state_fips = DeltaTable.forPath(spark, integration_layer_loc + '/L_STATE_FIPS')
-
-    df_LZ_l_state_state_fips = spark.sql(f"""
-        SELECT 
-        CAST(CODE AS INTEGER) AS CODE
-        ,DESCRIPTION
-        FROM {landing_zone_name}.L_STATE_FIPS
-    """)
-
-    delta_l_state_state_fips.alias("oldData") \
-        .merge(df_LZ_l_state_state_fips.alias("newData"), "oldData.CODE = newData.CODE") \
-        .whenMatchedUpdate(set={"DESCRIPTION": col("newData.DESCRIPTION")}) \
-        .whenNotMatchedInsert(values={"CODE": col("newData.CODE"), "DESCRIPTION": col("newData.DESCRIPTION")}) \
-        .execute()
+# def load_l_state_fips(spark, integration_layer_loc, landing_zone_name):
+#     delta_l_state_state_fips = DeltaTable.forPath(spark, integration_layer_loc + '/L_STATE_FIPS')
+#
+#     df_LZ_l_state_state_fips = spark.sql(f"""
+#         SELECT
+#         CAST(CODE AS INTEGER) AS CODE
+#         ,DESCRIPTION
+#         FROM {landing_zone_name}.L_STATE_FIPS
+#     """)
+#
+#     delta_l_state_state_fips.alias("oldData") \
+#         .merge(df_LZ_l_state_state_fips.alias("newData"), "oldData.CODE = newData.CODE") \
+#         .whenMatchedUpdate(set={"DESCRIPTION": col("newData.DESCRIPTION")}) \
+#         .whenNotMatchedInsert(values={"CODE": col("newData.CODE"), "DESCRIPTION": col("newData.DESCRIPTION")}) \
+#         .execute()
 
 
 def load_l_unique_carriers(spark, integration_layer_loc, landing_zone_name):
@@ -311,21 +311,21 @@ def load_l_weekdays(spark, integration_layer_loc, landing_zone_name):
         .execute()
 
 
-def load_l_world_area_codes(spark, integration_layer_loc, landing_zone_name):
-    delta_l_world_area_codes = DeltaTable.forPath(spark, integration_layer_loc + '/L_WORLD_AREA_CODES')
-
-    df_LZ_l_wworld_area_codes = spark.sql(f"""
-        SELECT 
-        CAST(CODE AS INTEGER) AS CODE
-        ,DESCRIPTION
-        FROM {landing_zone_name}.L_WORLD_AREA_CODES
-    """)
-
-    delta_l_world_area_codes.alias("oldData") \
-        .merge(df_LZ_l_wworld_area_codes.alias("newData"), "oldData.CODE = newData.CODE") \
-        .whenMatchedUpdate(set={"DESCRIPTION": col("newData.DESCRIPTION")}) \
-        .whenNotMatchedInsert(values={"CODE": col("newData.CODE"), "DESCRIPTION": col("newData.DESCRIPTION")}) \
-        .execute()
+# def load_l_world_area_codes(spark, integration_layer_loc, landing_zone_name):
+#     delta_l_world_area_codes = DeltaTable.forPath(spark, integration_layer_loc + '/L_WORLD_AREA_CODES')
+#
+#     df_LZ_l_wworld_area_codes = spark.sql(f"""
+#         SELECT
+#         CAST(CODE AS INTEGER) AS CODE
+#         ,DESCRIPTION
+#         FROM {landing_zone_name}.L_WORLD_AREA_CODES
+#     """)
+#
+#     delta_l_world_area_codes.alias("oldData") \
+#         .merge(df_LZ_l_wworld_area_codes.alias("newData"), "oldData.CODE = newData.CODE") \
+#         .whenMatchedUpdate(set={"DESCRIPTION": col("newData.DESCRIPTION")}) \
+#         .whenNotMatchedInsert(values={"CODE": col("newData.CODE"), "DESCRIPTION": col("newData.DESCRIPTION")}) \
+#         .execute()
 
 
 def load_l_yesno_resp(spark, integration_layer_loc, landing_zone_name):
@@ -347,7 +347,7 @@ def load_l_yesno_resp(spark, integration_layer_loc, landing_zone_name):
 
 def load_flights(spark, integration_layer_loc, landing_zone_name):
     delta_flights = DeltaTable.forPath(spark, integration_layer_loc + '/FLIGHTS')
-
+    # TODO : Delete data for one month in specific year not all the data using parameters
     delta_flights.delete()
 
     df_LZ_flights = spark.sql(f"""
@@ -477,8 +477,8 @@ if __name__ == '__main__':
     load_l_airline_id(spark, integration_layer_loc, landing_zone_name)
     load_l_airport(spark, integration_layer_loc, landing_zone_name)
     load_l_airport_id(spark, integration_layer_loc, landing_zone_name)
-    load_l_airport_seq_id(spark, integration_layer_loc, landing_zone_name)
-    load_l_cancellation(spark, integration_layer_loc, landing_zone_name)
+    # load_l_airport_seq_id(spark, integration_layer_loc, landing_zone_name)
+    #load_l_cancellation(spark, integration_layer_loc, landing_zone_name)
     load_l_carrier_history(spark, integration_layer_loc, landing_zone_name)
     load_l_city_market(spark, integration_layer_loc, landing_zone_name)
     load_l_deparrblk(spark, integration_layer_loc, landing_zone_name)
@@ -487,10 +487,10 @@ if __name__ == '__main__':
     load_l_months(spark, integration_layer_loc, landing_zone_name)
     load_l_ontime_delay_groups(spark, integration_layer_loc, landing_zone_name)
     load_l_quarters(spark, integration_layer_loc, landing_zone_name)
-    load_l_state_abr_aviation(spark, integration_layer_loc, landing_zone_name)
-    load_l_state_fips(spark, integration_layer_loc, landing_zone_name)
+    # load_l_state_abr_aviation(spark, integration_layer_loc, landing_zone_name)
+    # load_l_state_fips(spark, integration_layer_loc, landing_zone_name)
     load_l_unique_carriers(spark, integration_layer_loc, landing_zone_name)
     load_l_weekdays(spark, integration_layer_loc, landing_zone_name)
-    load_l_world_area_codes(spark, integration_layer_loc, landing_zone_name)
+    #load_l_world_area_codes(spark, integration_layer_loc, landing_zone_name)
     load_l_yesno_resp(spark, integration_layer_loc, landing_zone_name)
     load_flights(spark, integration_layer_loc, landing_zone_name)

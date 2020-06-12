@@ -1,7 +1,7 @@
 import logging
 from helper_functions.initialize_spark_session import initialize_spark_session
 from pyspark.sql.types import StructField, StructType, StringType
-from sql_queries.sql_constants import dict_dbs_locations,edge_node_path
+from sql_queries.sql_constants import dict_dbs_locations, edge_node_path
 from sql_queries.landing_zone_ddl import list_landing_zone_standard_lookups
 from helper_functions.zip_csv_to_gzip_parquet import zip_csv_to_gzip_parquet
 from helper_functions.loop_files import loop_files
@@ -46,13 +46,12 @@ if __name__ == '__main__':
     except Exception as e:
         logging.error(f"Failed to load {table_name} in the landing zone,{e}")
 
-    # Loading the standard lookups with the same schema in landing_zone
     try:
 
         flights_table_name = 'FLIGHTS'
 
         # Looping over the zip files in the Edge Node directory
-        list_zip_files = loop_files(os.path.join(edge_node_path, flights_table_name),'*.zip')
+        list_zip_files = loop_files(os.path.join(edge_node_path, flights_table_name), '*.zip')
 
         # get total number of files found
         num_files = len(list_zip_files)

@@ -40,7 +40,7 @@ schema_l_airport_seq_id = StructType(
 
 schema_l_cancellation = StructType(
     [
-        StructField("Code", IntegerType(), True),
+        StructField("Code", StringType(), True),
         StructField("Description", StringType(), True)
     ]
 )

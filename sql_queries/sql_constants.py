@@ -3,7 +3,7 @@ dict_dbs_names = {
     'INTEGRATION_LAYER_NAME': 'INTEGRATION_LAYER',
     'PRESENTATION_LAYER_NAME': 'PRESENTATION_LAYER'
 }
-
+# TODO : Add HDFS URL into an Environment variable
 dict_dbs_locations = {
     'LANDING_ZONE_LOC': 'hdfs://localhost:9000/FLIGHTS_DL/LANDING_ZONE',
     'INTEGRATION_LAYER_LOC': 'hdfs://localhost:9000/FLIGHTS_DL/INTEGRATION_LAYER',
