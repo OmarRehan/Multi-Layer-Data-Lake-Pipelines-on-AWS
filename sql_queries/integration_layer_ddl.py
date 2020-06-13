@@ -257,6 +257,23 @@ schema_flights = StructType(
     ]
 )
 
+schema_city_demographics = StructType(
+    [
+        StructField('COUNT',IntegerType(),True),
+        StructField('CITY',StringType(), True),
+        StructField('NUMBER_OF_VETERANS',DoubleType(), True),
+        StructField('MALE_POPULATION',DoubleType(), True),
+        StructField('FOREIGN_BORN',DoubleType(), True),
+        StructField('AVERAGE_HOUSEHOLD_SIZE',DoubleType(), True),
+        StructField('MEDIAN_AGE',DoubleType(), True),
+        StructField('STATE',StringType(), True),
+        StructField('RACE',StringType(), True),
+        StructField('TOTAL_POPULATION',IntegerType(), True),
+        StructField('STATE_CODE',StringType(), True),
+        StructField('FEMALE_POPULATION',DoubleType(), True)
+    ]
+)
+
 dict_integration_layer_standard_lookups = {
     'L_AIRLINE_ID': schema_l_airline_id,
     'L_DEPARRBLK': schema_l_deparrblk,

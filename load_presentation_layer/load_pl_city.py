@@ -6,7 +6,7 @@ from pyspark.sql.functions import monotonically_increasing_id
 def load_pl_city(spark, pl_loc,pl_name, il_name):
 
     df_LZ_city = spark.sql(f"""
-        SELECT TRIM(CITY_NAME),STATE_ABR
+        SELECT TRIM(CITY_NAME) CITY_NAME,STATE_ABR
         FROM
         (
             SELECT DISTINCT 
@@ -18,9 +18,20 @@ def load_pl_city(spark, pl_loc,pl_name, il_name):
             SPLIT(UPPER(DEST_CITY_NAME),',')[0] CITY_NAME,
             DEST_STATE_ABR STATE_ABR
             FROM {il_name}.FLIGHTS
+            
+            --CITY DEMOGRAPHICS DELTA
+            UNION
+            SELECT 
+            TRIM(UPPER(CITY_DEMOGRAPHICS.CITY)) CITY_NAME,STATE_CODE STATE_ABR
+            FROM {il_name}.CITY_DEMOGRAPHICS
+            LEFT ANTI JOIN {pl_name}.CITY
+            ON TRIM(UPPER(CITY_DEMOGRAPHICS.CITY)) = CITY.CITY_NAME
+            AND CITY_DEMOGRAPHICS.STATE_CODE = CITY.STATE_ABR
+
         ) SRC
         LEFT ANTI JOIN {pl_name}.CITY
         ON SRC.CITY_NAME = CITY.CITY_NAME
+        AND SRC.STATE_ABR = CITY.STATE_ABR
     """)
 
     df_LZ_city = df_LZ_city.withColumn("CITY_ID",monotonically_increasing_id())

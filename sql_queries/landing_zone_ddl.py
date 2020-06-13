@@ -328,6 +328,27 @@ ddl_flights = """
     LOCATION '{landing_zone_db_loc}/FLIGHTS/'
 """
 
+ddl_city_demographics = """
+    CREATE TABLE IF NOT EXISTS {landing_zone_db_name}.CITY_DEMOGRAPHICS
+    (
+        COUNT INTEGER,
+        CITY STRING,
+        NUMBER_OF_VETERANS DOUBLE,
+        MALE_POPULATION DOUBLE,
+        FOREIGN_BORN DOUBLE,
+        AVERAGE_HOUSEHOLD_SIZE DOUBLE,
+        MEDIAN_AGE DOUBLE,
+        STATE STRING,
+        RACE STRING,
+        TOTAL_POPULATION INTEGER,
+        STATE_CODE STRING,
+        FEMALE_POPULATION DOUBLE
+    )
+    USING CSV
+    LOCATION '{landing_zone_db_loc}/CITY_DEMOGRAPHICS/'
+    OPTIONS ('header'='true')
+"""
+
 dict_landing_zone_ddls = {
     'L_AIRLINE_ID': ddl_l_airline_id,
     'L_DEPARRBLK': ddl_l_deparrblk,
@@ -348,7 +369,8 @@ dict_landing_zone_ddls = {
     'L_YESNO_RESP': ddl_l_yesno_resp,
     'L_CARRIER_HISTORY': ddl_l_carrier_history,
     'L_QUARTERS': ddl_l_quarters,
-    'FLIGHTS': ddl_flights
+    'FLIGHTS': ddl_flights,
+    'CITY_DEMOGRAPHICS': ddl_city_demographics
 }
 
 list_landing_zone_standard_lookups = [

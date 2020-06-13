@@ -4,7 +4,7 @@ ddl_drop_presentation_layer_db = """DROP DATABASE IF EXISTS {presentation_layer_
 ##################################################
 # Schema for each table in the integration layer #
 ##################################################
-from pyspark.sql.types import StructField, StructType, StringType, IntegerType, LongType, DoubleType
+from pyspark.sql.types import StructField, StructType, StringType, IntegerType, LongType, DoubleType, DateType
 
 schema_cancellation = StructType(
     [
@@ -53,6 +53,33 @@ schema_airline = StructType(
     ]
 )
 
+schema_calendar = StructType(
+    [
+        StructField("DATE_ID", IntegerType(), True),
+        StructField("DATE_COL", DateType(), True),
+        StructField("YEAR", IntegerType(), True),
+        StructField("MONTH", IntegerType(), True),
+        StructField("DAY", IntegerType(), True),
+        StructField("DAY_OF_MONTH", IntegerType(), True),
+        StructField("DAY_OF_YEAR", IntegerType(), True),
+        StructField("DAY_NAME", StringType(), True)
+    ]
+)
+
+schema_city_demographics = StructType(
+    [
+        StructField("CITY_ID", LongType(), True),
+        StructField("RACE", StringType(), True),
+        StructField("NUMBER_OF_VETERANS", IntegerType(), True),
+        StructField("MALE_POPULATION", IntegerType(), True),
+        StructField('FEMALE_POPULATION',IntegerType(), True),
+        StructField("FOREIGN_BORN", IntegerType(), True),
+        StructField("AVERAGE_HOUSEHOLD_SIZE", DoubleType(), True),
+        StructField("MEDIAN_AGE", DoubleType(), True),
+        StructField("TOTAL_POPULATION", IntegerType(), True)
+    ]
+)
+
 # Contains all presentation layer's non partitioned tables
 dict_pl_non_partitioned_tables = {
     'CANCELLATION': schema_cancellation,
@@ -60,5 +87,6 @@ dict_pl_non_partitioned_tables = {
     'STATE': schema_state,
     'CITY': schema_city,
     'AIRPORT': schema_airport,
-    'AIRLINE': schema_airline
+    'AIRLINE': schema_airline,
+    'CITY_DEMOGRAPHICS': schema_city_demographics
 }
