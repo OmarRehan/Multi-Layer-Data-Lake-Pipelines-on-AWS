@@ -4,10 +4,12 @@ dict_dbs_names = {
     'PRESENTATION_LAYER_NAME': 'PRESENTATION_LAYER'
 }
 # TODO : Add HDFS URL into an Environment variable
+hdfs_path = 'hdfs://localhost:9000'
+
 dict_dbs_locations = {
-    'LANDING_ZONE_LOC': 'hdfs://localhost:9000/FLIGHTS_DL/LANDING_ZONE',
-    'INTEGRATION_LAYER_LOC': 'hdfs://localhost:9000/FLIGHTS_DL/INTEGRATION_LAYER',
-    'PRESENTATION_LAYER_LOC': 'hdfs://localhost:9000/FLIGHTS_DL/PRESENTATION_LAYER'
+    'LANDING_ZONE_LOC': f'{hdfs_path}/FLIGHTS_DL/LANDING_ZONE',
+    'INTEGRATION_LAYER_LOC': f'{hdfs_path}/FLIGHTS_DL/INTEGRATION_LAYER',
+    'PRESENTATION_LAYER_LOC': f'{hdfs_path}/FLIGHTS_DL/PRESENTATION_LAYER'
 }
 
 edge_node_path = '/home/admin_123/Desktop/Main/DataSets/FlightsData/'
