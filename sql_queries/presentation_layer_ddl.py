@@ -80,6 +80,40 @@ schema_city_demographics = StructType(
     ]
 )
 
+
+schema_flights = StructType(
+    [
+        StructField("FLIGHT_ID", StringType(), True),
+        StructField("FLIGHT_DATE", IntegerType(), True),
+        StructField("AIRLINE_ID", LongType(), True),
+        StructField("TAIL_NUM", StringType(), True),
+        StructField('FLIGHT_NUM',LongType(), True),
+        StructField("ORIGIN_AIRPORT_ID", LongType(), True),
+        StructField("DEST_AIRPORT_ID", LongType(), True),
+        StructField("DEPARTURE_TIME", StringType(), True),
+        StructField("EARLY_DEPARTURE_MINS", IntegerType(), True),
+        StructField("DELAY_DEPARTURE_MINS", IntegerType(), True),
+        StructField("TAXI_OUT_MINS", DoubleType(), True),
+        StructField("TAXI_IN_MINS", DoubleType(), True),
+        StructField("WHEELS_OFF_TIME", StringType(), True),
+        StructField('WHEELS_ON_TIME', StringType(), True),
+        StructField("ARR_TIME", StringType(), True),
+        StructField("EARLY_ARRIVAL_MINS", IntegerType(), True),
+        StructField("DELAY_ARRIVAL_MINS", IntegerType(), True),
+        StructField("CANCELLATION_CODE", StringType(), True),
+        StructField("FLIGHT_ELAPSED_TIME", DoubleType(), True),
+        StructField("AIR_TIME", DoubleType(), True),
+        StructField("DISTANCE_MILES", DoubleType(), True),
+        StructField("CARRIER_DELAY_MINS", IntegerType(), True),
+        StructField('WEATHER_DELAY_MINS', IntegerType(), True),
+        StructField("NAS_DELAY_MINS", IntegerType(), True),
+        StructField("SECURITY_DELAY_MINS", IntegerType(), True),
+        StructField("LATE_AIRCRAFT_DELAY_MINS", IntegerType(), True),
+        StructField("TOTAL_ADD_GTIME_MINS", IntegerType(), True),
+        StructField("FLIGHT_YEARMON", IntegerType(), True)
+    ]
+)
+
 # Contains all presentation layer's non partitioned tables
 dict_pl_non_partitioned_tables = {
     'CANCELLATION': schema_cancellation,

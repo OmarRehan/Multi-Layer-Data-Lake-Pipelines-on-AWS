@@ -1,6 +1,6 @@
 import logging
 from sql_queries.presentation_layer_ddl import ddl_create_presentation_layer_db, dict_pl_non_partitioned_tables, \
-    schema_calendar
+    schema_calendar,schema_flights
 from sql_queries.sql_constants import dict_dbs_locations, dict_dbs_names
 from helper_functions.initialize_spark_session import initialize_spark_session
 import os
@@ -62,6 +62,7 @@ if __name__ == '__main__':
     try:
         table_name_calendar = 'CALENDAR'
 
+        # Checking if the table already exists
         if df_exist_tables.filter(col("tableName").isin(table_name_calendar.lower())).select("tableName").count() == 0:
             table_loc_calendar = os.path.join(db_loc, table_name_calendar)
 
@@ -76,22 +77,25 @@ if __name__ == '__main__':
     except Exception as e:
         logging.error(f"Failed to create {table_name},{e}")
 
-    # # Creating Flights fact table, this is separated because this should be partitioned by date
-    # try:
-    #
-    #     flights_loc = os.path.join(db_loc, 'FLIGHTS')
-    #
-    #     # An empty df with a table schema to save it as delta, as current delta supports creating tables using dataframe syntax only
-    #     flights_df = spark.createDataFrame(spark.sparkContext.emptyRDD(), schema_flights)
-    #
-    #     # Saving the Dataframe into the corresponding path on HDFS
-    #     flights_df.write.partitionBy(['YEAR','MONTH']).format("delta").save(flights_loc)
-    #
-    #     # Creating the table in Spark SQL schema
-    #     spark.sql(f"""CREATE TABLE {db_name}.FLIGHTS USING DELTA LOCATION '{flights_loc}'""")
-    #     #spark.sql("""CREATE TABLE INTEGRATION_LAYER.'FLIGHTS' USING DELTA LOCATION 'hdfs://localhost:9000/FLIGHTS_DL/INTEGRATION_LAYER/FLIGHTS'""")
-    #
-    #     logging.info(f'FLIGHTS has been created in {db_name}')
-    #
-    # except Exception as e:
-    #     logging.error(f"Failed to create table,{e}")
+    # Creating Flights fact table, this is separated because this should be partitioned by date
+    try:
+
+        table_name_flights = 'FLIGHTS'
+
+        # Checking if the table already exists
+        if df_exist_tables.filter(col("tableName").isin(table_name_flights.lower())).select("tableName").count() == 0:
+            flights_loc = os.path.join(db_loc, table_name_flights)
+
+            # An empty df with a table schema to save it as delta, as current delta supports creating tables using dataframe syntax only
+            flights_df = spark.createDataFrame(spark.sparkContext.emptyRDD(), schema_flights)
+
+            # Saving the Dataframe into the corresponding path on HDFS
+            flights_df.write.partitionBy(['FLIGHT_YEARMON']).format("delta").save(flights_loc)
+
+            # Creating the table in Spark SQL schema
+            spark.sql(f"""CREATE TABLE {db_name}.FLIGHTS USING DELTA LOCATION '{flights_loc}'""")
+
+            logging.info(f'FLIGHTS has been created in {db_name}')
+
+    except Exception as e:
+        logging.error(f"Failed to create table,{e}")

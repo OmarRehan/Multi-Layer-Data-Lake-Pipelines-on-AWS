@@ -36,7 +36,7 @@ def load_pl_airport(spark, pl_loc,pl_name, il_name):
 
 
 if __name__ == '__main__':
-    spark = initialize_spark_session('load_pl_cancellation')
+    spark = initialize_spark_session('load_pl_airport')
     from delta.tables import *
 
     presentation_layer_loc = dict_dbs_locations.get('PRESENTATION_LAYER_LOC')

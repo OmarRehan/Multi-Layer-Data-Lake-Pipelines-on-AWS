@@ -44,7 +44,7 @@ def load_pl_calendar(pl_loc, start_date, end_date):
 
 
 if __name__ == '__main__':
-    spark = initialize_spark_session('load_pl_airline')
+    spark = initialize_spark_session('load_pl_calendar')
     from delta.tables import *
 
     presentation_layer_loc = dict_dbs_locations.get('PRESENTATION_LAYER_LOC')

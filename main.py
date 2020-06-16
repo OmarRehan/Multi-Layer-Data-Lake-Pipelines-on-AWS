@@ -1,8 +1,6 @@
 # TODO : Consolidate all repetitive queries into spark handler class, (Db creation and drop)
 # TODO : Functionalize all create load files
 # TODO : Enable Mysql Connection for Metastore db
-# TODO : Complete Loading the PL Model
 # TODO : Provision an EMR Cluster for just one lookup, read data from S# and load it through the Layers
-# TODO : Consider Adding the Demographics data
-# TODO : Separate each table loading in a different file, with different spark session to achieve atomicity and modularity
-# TODO : DDL Creation should be functionalized or create a spark class
+# The final Model may not be suitable for data lakes, but i chose to make it in the lowest granularity to be able to practice more on data handling
+# TODO : create a drop table function in IL & PL to delete HDFS Directory and drop table in SPARK SQL
