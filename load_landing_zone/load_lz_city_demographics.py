@@ -2,7 +2,7 @@ import logging
 import pandas as pd
 import os
 from helper_functions.initialize_spark_session import initialize_spark_session
-from sql_queries.sql_constants import edge_node_path,dict_dbs_locations
+from constants import edge_node_path,dict_dbs_locations
 
 
 def load_lz_city_demographics(spark,edge_node_loc,lz_loc):

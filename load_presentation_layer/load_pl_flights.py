@@ -1,5 +1,5 @@
 from helper_functions.initialize_spark_session import initialize_spark_session
-from sql_queries.sql_constants import dict_dbs_locations, dict_dbs_names
+from constants import dict_dbs_locations, dict_dbs_names
 import sys
 
 

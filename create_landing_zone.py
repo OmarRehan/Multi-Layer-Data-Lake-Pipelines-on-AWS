@@ -1,6 +1,6 @@
 import logging
 from sql_queries.landing_zone_ddl import ddl_create_land_zone_db,dict_landing_zone_ddls
-from sql_queries.sql_constants import dict_dbs_locations, dict_dbs_names
+from constants import dict_dbs_locations, dict_dbs_names
 from helper_functions.initialize_spark_session import initialize_spark_session
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s: %(levelname)s: %(message)s ")

@@ -1,5 +1,7 @@
 import os
 
+s3_bucket_name = 'flights-dl-edge-node'
+aws_region = 'us-west-2'
 
 hdfs_path = os.environ['HDFS_PATH']
 edge_node_path = os.environ['EDGE_NODE_PATH']

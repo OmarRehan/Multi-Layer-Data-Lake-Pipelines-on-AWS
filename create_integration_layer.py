@@ -1,7 +1,7 @@
 import logging
 from sql_queries.integration_layer_ddl import ddl_create_integration_layer_db, dict_integration_layer_standard_lookups, \
     schema_flights,schema_city_demographics
-from sql_queries.sql_constants import dict_dbs_locations, dict_dbs_names
+from constants import dict_dbs_locations, dict_dbs_names
 from helper_functions.initialize_spark_session import initialize_spark_session
 import os
 from pyspark.sql.functions import col

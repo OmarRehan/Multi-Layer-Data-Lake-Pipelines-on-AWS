@@ -1,6 +1,6 @@
 from helper_functions.initialize_spark_session import initialize_spark_session
 from pyspark.sql.functions import col
-from sql_queries.sql_constants import dict_dbs_locations, dict_dbs_names
+from constants import dict_dbs_locations, dict_dbs_names
 
 
 def load_l_airline_id(spark, integration_layer_loc, landing_zone_name):

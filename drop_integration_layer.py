@@ -1,7 +1,7 @@
 import logging
 from helper_functions.initialize_spark_session import initialize_spark_session
 from sql_queries.integration_layer_ddl import ddl_drop_integration_layer_db
-from sql_queries.sql_constants import dict_dbs_names
+from constants import dict_dbs_names
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s:%(levelname)s:%(message)s")
 

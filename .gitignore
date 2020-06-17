@@ -2,3 +2,5 @@
 *.cpython-36.pyc
 *.ipynb
 *.xlsx\#
+*.iml
+*.xml

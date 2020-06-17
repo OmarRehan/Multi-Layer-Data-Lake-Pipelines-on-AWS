@@ -1,7 +1,7 @@
 import logging
 from helper_functions.initialize_spark_session import initialize_spark_session
 from pyspark.sql.types import StructField, StructType, StringType
-from sql_queries.sql_constants import dict_dbs_locations, edge_node_path
+from constants import dict_dbs_locations, edge_node_path
 from sql_queries.landing_zone_ddl import list_landing_zone_standard_lookups
 from helper_functions.zip_csv_to_gzip_parquet import zip_csv_to_gzip_parquet
 from helper_functions.loop_files import loop_files

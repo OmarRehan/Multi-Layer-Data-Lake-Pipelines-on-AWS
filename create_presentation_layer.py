@@ -1,7 +1,7 @@
 import logging
 from sql_queries.presentation_layer_ddl import ddl_create_presentation_layer_db, dict_pl_non_partitioned_tables, \
     schema_calendar,schema_flights
-from sql_queries.sql_constants import dict_dbs_locations, dict_dbs_names
+from constants import dict_dbs_locations, dict_dbs_names
 from helper_functions.initialize_spark_session import initialize_spark_session
 import os
 from pyspark.sql.functions import col

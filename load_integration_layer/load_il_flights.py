@@ -1,6 +1,6 @@
 from helper_functions.initialize_spark_session import initialize_spark_session
-from sql_queries.sql_constants import dict_dbs_locations, dict_dbs_names
-from sql_queries.sql_constants import missing_val_replace_alphanumeric,missing_val_replace_numeric
+from constants import dict_dbs_locations, dict_dbs_names
+from constants import missing_val_replace_alphanumeric,missing_val_replace_numeric
 
 
 def load_flights(spark, integration_layer_loc, landing_zone_name):
