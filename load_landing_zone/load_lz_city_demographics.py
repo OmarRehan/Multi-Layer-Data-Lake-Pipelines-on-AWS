@@ -27,10 +27,11 @@ def load_lz_city_demographics(spark,edge_node_loc,lz_loc):
 
     except Exception as e:
         logging.error(f'Failed to create spark dataframe, {e}')
+        raise Exception(f'Failed to create spark dataframe, {e}')
 
 
 if __name__ == '__main__':
-    print('Hi')
+
     spark = initialize_spark_session('load_lz_city_demographics')
 
     landing_zone_loc = dict_dbs_locations.get('LANDING_ZONE_LOC')

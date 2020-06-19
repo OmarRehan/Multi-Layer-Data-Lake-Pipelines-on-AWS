@@ -9,6 +9,8 @@
       <w>hdfs</w>
       <w>integ</w>
       <w>pyarrow</w>
+      <w>pythonpath</w>
+      <w>vori</w>
       <w>yearmonth</w>
     </words>
   </dictionary>

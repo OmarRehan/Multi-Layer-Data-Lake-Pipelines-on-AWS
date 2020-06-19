@@ -20,7 +20,7 @@ def load_city_demographics(spark, integration_layer_loc, landing_zone_name):
         RACE,
         TOTAL_POPULATION,
         STATE_CODE,
-        NVL(FEMALE_POPULATION,{missing_val_replace_numeric}) FEMALE_POPULATION
+        CAST(NVL(FEMALE_POPULATION,{missing_val_replace_numeric}) AS DOUBLE) FEMALE_POPULATION
         FROM {landing_zone_name}.CITY_DEMOGRAPHICS
     """)
 
