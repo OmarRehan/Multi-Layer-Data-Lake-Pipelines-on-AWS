@@ -26,6 +26,7 @@ def initialize_spark_session(app_name):
 
     except Exception as e:
         logging.error(f"Failed to initialize a spark session,{e}")
+        raise Exception(f"Failed to initialize a spark session,{e}")
 
 
 if __name__ == '__main__':

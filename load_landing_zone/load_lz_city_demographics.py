@@ -25,6 +25,8 @@ def load_lz_city_demographics(spark,edge_node_loc,lz_loc):
             .option('header', 'true') \
             .save(os.path.join(lz_loc, table_name))
 
+        logging.info(f'{table_name} has been loaded in Landing Zone')
+
     except Exception as e:
         logging.error(f'Failed to create spark dataframe, {e}')
         raise Exception(f'Failed to create spark dataframe, {e}')

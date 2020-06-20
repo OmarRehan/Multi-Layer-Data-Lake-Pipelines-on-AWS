@@ -19,7 +19,7 @@ def iac_create_emr_cluster():
         emr_cluster = emr_client.run_job_flow(
             Name='flights_dl',
             LogUri='s3://aws-logs-131785130434-us-west-2/elasticmapreduce/',
-            ReleaseLabel='emr-5.29.0',
+            ReleaseLabel='emr-5.28.0',
             Applications=[
                 {
                     'Name': 'Spark'

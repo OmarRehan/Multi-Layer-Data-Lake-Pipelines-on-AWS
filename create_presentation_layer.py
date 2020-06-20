@@ -8,7 +8,6 @@ from pyspark.sql.functions import col
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s: %(levelname)s: %(message)s ")
 
-# TODO : Partition Flights Table on Year Month basis
 
 if __name__ == '__main__':
     spark = initialize_spark_session('create_presentation_layer')
