@@ -1,13 +1,12 @@
 import logging
 from sql_queries.integration_layer_ddl import ddl_create_integration_layer_db, dict_integration_layer_standard_lookups, \
-    schema_flights,schema_city_demographics
+    schema_flights, schema_city_demographics
 from constants import dict_dbs_locations, dict_dbs_names
 from helper_functions.initialize_spark_session import initialize_spark_session
 import os
 from pyspark.sql.functions import col
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s: %(levelname)s: %(message)s ")
-
 
 if __name__ == '__main__':
     spark = initialize_spark_session('create_integration_layer')
@@ -29,6 +28,8 @@ if __name__ == '__main__':
 
     except Exception as e:
         logging.error(f'Failed to create the {db_name} db in spark sql,{e}')
+        spark.stop()
+        raise Exception(f'Failed to create the {db_name}, {e}')
 
     # getting a list of tables names already in the db to check if they already exist
     try:
@@ -36,6 +37,8 @@ if __name__ == '__main__':
 
     except Exception as e:
         logging.error(f'Failed to retrieve tables names,{e}')
+        spark.stop()
+        raise Exception(f'Failed to retrieve tables names,{e}')
 
     # creating integration_layer standard lookups
     try:
@@ -56,7 +59,9 @@ if __name__ == '__main__':
                 logging.info(f'{table_name} has been created in {db_name}')
 
     except Exception as e:
-        logging.error(f"Failed to create table,{e}")
+        logging.error(f"Failed to create {table_name},{e}")
+        spark.stop()
+        raise Exception(f"Failed to create {table_name},{e}")
 
     # Creating Flights fact table, this is separated because this should be partitioned by date
     try:
@@ -77,7 +82,9 @@ if __name__ == '__main__':
             logging.info(f'FLIGHTS has been created in {db_name}')
 
     except Exception as e:
-        logging.error(f"Failed to create table,{e}")
+        logging.error(f"Failed to create FLIGHTS table,{e}")
+        spark.stop()
+        raise Exception(f"Failed to create FLIGHTS,{e}")
 
     # Creating City Demographics
     try:
@@ -97,4 +104,6 @@ if __name__ == '__main__':
             logging.info(f'CITY_DEMOGRAPHICS has been created in {db_name}')
 
     except Exception as e:
-        logging.error(f"Failed to create table,{e}")
+        logging.error(f"Failed to create CITY_DEMOGRAPHICS table,{e}")
+        spark.stop()
+        raise Exception(f"Failed to create CITY_DEMOGRAPHICS,{e}")

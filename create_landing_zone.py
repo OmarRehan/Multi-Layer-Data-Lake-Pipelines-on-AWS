@@ -21,6 +21,8 @@ if __name__ == '__main__':
 
     except Exception as e:
         logging.error(f'Failed to create the {db_name} db in spark sql,{e}')
+        spark.stop()
+        raise Exception(f'Failed to create the {db_name}, {e}')
 
     # creating landing zone tables
     try:
@@ -31,4 +33,6 @@ if __name__ == '__main__':
             logging.info(f'{table_name} has been created in {db_name}')
 
     except Exception as e:
-        logging.error(f"Failed to create table,{e}")
+        logging.error(f"Failed to create {table_name},{e}")
+        spark.stop()
+        raise Exception(f'Failed to create {table_name}, {e}')

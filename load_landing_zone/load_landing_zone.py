@@ -46,6 +46,7 @@ if __name__ == '__main__':
     except Exception as e:
         logging.error(f"Failed to load {table_name} in the landing zone,{e}")
 
+    # TODO : source file should be in .zip format with yyyymm format
     try:
 
         flights_table_name = 'FLIGHTS'

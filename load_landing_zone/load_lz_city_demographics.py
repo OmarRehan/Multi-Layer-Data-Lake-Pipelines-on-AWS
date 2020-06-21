@@ -29,6 +29,7 @@ def load_lz_city_demographics(spark,edge_node_loc,lz_loc):
 
     except Exception as e:
         logging.error(f'Failed to create spark dataframe, {e}')
+        spark.stop()
         raise Exception(f'Failed to create spark dataframe, {e}')
 
 

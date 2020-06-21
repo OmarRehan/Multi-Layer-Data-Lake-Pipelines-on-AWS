@@ -8,7 +8,7 @@ import sys
 def load_pl_flights(spark,pl_loc,il_name, yearmonth):
 
     try:
-
+        # TODO : Add Where clause to the select query to load only the specified year month
         df_il_flights = spark.sql(f"""
                 SELECT
                 CONCAT_WS('::',FL_DATE,OP_CARRIER_AIRLINE_ID,OP_CARRIER_FL_NUM,ORIGIN_AIRPORT_ID,DEST_AIRPORT_ID) FLIGHT_ID
@@ -40,6 +40,7 @@ def load_pl_flights(spark,pl_loc,il_name, yearmonth):
                 ,CAST(TOTAL_ADD_GTIME AS INTEGER) TOTAL_ADD_GTIME_MINS
                 ,CAST(CONCAT(YEAR(FL_DATE),LPAD(MONTH(FL_DATE),2,'0')) AS INTEGER) FLIGHT_YEARMON
                 FROM {il_name}.FLIGHTS
+                WHERE YEAR = SUBSTR({yearmonth},1,4) AND MONTH = SUBSTR({yearmonth},5,6)
             """)
 
         df_il_flights.write \

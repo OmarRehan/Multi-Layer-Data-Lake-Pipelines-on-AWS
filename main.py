@@ -7,3 +7,4 @@
 # TODO : raise exception in case of and error in all load functions to mark airflow task as failed
 # hdfs_path = os.environ['HDFS_PATH']
 # edge_node_path = os.environ['EDGE_NODE_PATH']
+# TODO : Data should be moved into and archive after loaded in INTEGRATION_LAYER
