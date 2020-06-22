@@ -102,23 +102,23 @@ def load_flights(spark, integration_layer_loc, landing_zone_name,year,month):
             NVL(DIV3_TOTAL_GTIME,{missing_val_replace_numeric}) DIV3_TOTAL_GTIME,
             NVL(DIV3_LONGEST_GTIME,{missing_val_replace_numeric}) DIV3_LONGEST_GTIME,
             NVL(DIV3_WHEELS_OFF,{missing_val_replace_numeric}) DIV3_WHEELS_OFF,
-            NVL(DIV3_TAIL_NUM,{missing_val_replace_numeric}) DIV3_TAIL_NUM,
-            NVL(DIV4_AIRPORT,{missing_val_replace_numeric}) DIV4_AIRPORT,
+            NVL(DIV3_TAIL_NUM,'{missing_val_replace_alphanumeric}') DIV3_TAIL_NUM,
+            NVL(DIV4_AIRPORT,'{missing_val_replace_alphanumeric}') DIV4_AIRPORT,
             NVL(DIV4_AIRPORT_ID,{missing_val_replace_numeric}) DIV4_AIRPORT_ID,
             NVL(DIV4_AIRPORT_SEQ_ID,{missing_val_replace_numeric}) DIV4_AIRPORT_SEQ_ID,
             NVL(DIV4_WHEELS_ON,{missing_val_replace_numeric}) DIV4_WHEELS_ON,
             NVL(DIV4_TOTAL_GTIME,{missing_val_replace_numeric}) DIV4_TOTAL_GTIME,
             NVL(DIV4_LONGEST_GTIME,{missing_val_replace_numeric}) DIV4_LONGEST_GTIME,
             NVL(DIV4_WHEELS_OFF,{missing_val_replace_numeric}) DIV4_WHEELS_OFF,
-            NVL(DIV4_TAIL_NUM,{missing_val_replace_numeric}) DIV4_TAIL_NUM,
-            NVL(DIV5_AIRPORT,{missing_val_replace_numeric}) DIV5_AIRPORT,
+            NVL(DIV4_TAIL_NUM,'{missing_val_replace_alphanumeric}') DIV4_TAIL_NUM,
+            NVL(DIV5_AIRPORT,'{missing_val_replace_alphanumeric}') DIV5_AIRPORT,
             NVL(DIV5_AIRPORT_ID,{missing_val_replace_numeric}) DIV5_AIRPORT_ID,
             NVL(DIV5_AIRPORT_SEQ_ID,{missing_val_replace_numeric}) DIV5_AIRPORT_SEQ_ID,
             NVL(DIV5_WHEELS_ON,{missing_val_replace_numeric}) DIV5_WHEELS_ON,
             NVL(DIV5_TOTAL_GTIME,{missing_val_replace_numeric}) DIV5_TOTAL_GTIME,
             NVL(DIV5_LONGEST_GTIME,{missing_val_replace_numeric}) DIV5_LONGEST_GTIME,
             NVL(DIV5_WHEELS_OFF,{missing_val_replace_numeric}) DIV5_WHEELS_OFF,
-            NVL(DIV5_TAIL_NUM,{missing_val_replace_numeric}) DIV5_TAIL_NUM
+            NVL(DIV5_TAIL_NUM,'{missing_val_replace_alphanumeric}') DIV5_TAIL_NUM
             FROM {landing_zone_name}.FLIGHTS
             WHERE YEAR = {year}
             AND MONTH = {month}

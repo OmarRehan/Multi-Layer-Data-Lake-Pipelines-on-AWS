@@ -237,23 +237,23 @@ schema_flights = StructType(
         StructField("DIV3_TOTAL_GTIME", DoubleType(), True),
         StructField("DIV3_LONGEST_GTIME", DoubleType(), True),
         StructField("DIV3_WHEELS_OFF", DoubleType(), True),
-        StructField("DIV3_TAIL_NUM", DoubleType(), True),
-        StructField("DIV4_AIRPORT", DoubleType(), True),
+        StructField("DIV3_TAIL_NUM", StringType(), True),
+        StructField("DIV4_AIRPORT", StringType(), True),
         StructField("DIV4_AIRPORT_ID", DoubleType(), True),
         StructField("DIV4_AIRPORT_SEQ_ID", DoubleType(), True),
         StructField("DIV4_WHEELS_ON", DoubleType(), True),
         StructField("DIV4_TOTAL_GTIME", DoubleType(), True),
         StructField("DIV4_LONGEST_GTIME", DoubleType(), True),
         StructField("DIV4_WHEELS_OFF", DoubleType(), True),
-        StructField("DIV4_TAIL_NUM", DoubleType(), True),
-        StructField("DIV5_AIRPORT", DoubleType(), True),
+        StructField("DIV4_TAIL_NUM", StringType(), True),
+        StructField("DIV5_AIRPORT", StringType(), True),
         StructField("DIV5_AIRPORT_ID", DoubleType(), True),
         StructField("DIV5_AIRPORT_SEQ_ID", DoubleType(), True),
         StructField("DIV5_WHEELS_ON", DoubleType(), True),
         StructField("DIV5_TOTAL_GTIME", DoubleType(), True),
         StructField("DIV5_LONGEST_GTIME", DoubleType(), True),
         StructField("DIV5_WHEELS_OFF", DoubleType(), True),
-        StructField("DIV5_TAIL_NUM", DoubleType(), True)
+        StructField("DIV5_TAIL_NUM", StringType(), True)
     ]
 )
 

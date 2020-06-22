@@ -3,6 +3,7 @@ import sys
 import os
 from helper_functions.initialize_spark_session import initialize_spark_session
 from constants import edge_node_path, dict_dbs_locations
+from sql_queries.integration_layer_ddl import schema_flights
 
 
 def load_lz_flights(spark, yearmonth, edge_node_loc, lz_loc):
@@ -10,7 +11,7 @@ def load_lz_flights(spark, yearmonth, edge_node_loc, lz_loc):
 
     try:
 
-        df_flights = spark.read.format('parquet').option('compression', 'gzip').load(
+        df_flights = spark.read.format('parquet').schema(schema_flights).option('compression', 'gzip').load(
             os.path.join(edge_node_loc, flights_table_name, yearmonth+'.gz'))
 
         df_flights.write.format('parquet') \
