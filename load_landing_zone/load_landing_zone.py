@@ -45,33 +45,3 @@ if __name__ == '__main__':
 
     except Exception as e:
         logging.error(f"Failed to load {table_name} in the landing zone,{e}")
-
-    # TODO : source file should be in .zip format with yyyymm format
-    try:
-
-        flights_table_name = 'FLIGHTS'
-
-        # Looping over the zip files in the Edge Node directory
-        list_zip_files = loop_files(os.path.join(edge_node_path, flights_table_name), '*.zip')
-
-        # get total number of files found
-        num_files = len(list_zip_files)
-        logging.info(' {} files found in {}'.format(num_files, os.path.join(edge_node_path, flights_table_name)))
-
-        # Transforming the available csv zip files into parquet gzip
-        for file in list_zip_files:
-            zip_csv_to_gzip_parquet(file)
-            logging.info(f'{file} transformed into parquet gzip')
-
-        df_flights = spark.read.format('parquet').option('compression', 'gzip').load(
-            os.path.join(edge_node_path, flights_table_name, '*.gz'))
-
-        df_flights.write.format('parquet') \
-            .mode("overwrite") \
-            .option("compression", "gzip") \
-            .save(os.path.join(landing_zone_location, flights_table_name))
-
-        logging.info(f'{flights_table_name} has been loaded in the landing zone.')
-
-    except Exception as e:
-        logging.error(f"Failed to load Flights in the landing zone,{e}")
