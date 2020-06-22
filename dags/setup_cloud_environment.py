@@ -92,10 +92,10 @@ with DAG('setup_cloud_environment',
         command="""mkdir $FLIGHT_PROJECT_PATH"""
     )
 
+    # TODO : Solve the static path issue
     task_upload_project_files = BashOperator(
         task_id='upload_project_files',
-        bash_command=f"scp -vri {ssh_emr_key} -o StrictHostKeyChecking=no $FLIGHT_PROJECT_PATH/{files_to_upload} {ssh_emr_user}@{ssh_emr_host}:/home/hadoop/FLIGHTS_PROJECT",
-        provide_context=True
+        bash_command=f"scp -vri {ssh_emr_key} -o StrictHostKeyChecking=no $FLIGHT_PROJECT_PATH/{files_to_upload} {ssh_emr_user}@{ssh_emr_host}:/home/hadoop/FLIGHTS_PROJECT"
     )
 
     task_create_landing_zone = SSHOperator(
