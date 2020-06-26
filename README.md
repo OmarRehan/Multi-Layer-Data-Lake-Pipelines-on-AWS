@@ -10,7 +10,7 @@ Data Sources:-
 
 System Components :-
 ------------------------
-<<<attach system component image here>>>
+![system_compnents](https://user-images.githubusercontent.com/20134836/85896142-3f4ced80-b7f8-11ea-8800-955e6c52f7a3.png)
 - Delta Lake :-
     - provides ACID transactions, scalable metadata handling, and unifies streaming and batch data processing. 
     - Also Delta Lake is fully compatible with Apache Spark APIs so users with different skills can use the data whether using SQL (Spark SQL),spark APIs ,python, R, etc...
@@ -53,7 +53,7 @@ Integration Layer:-
 - Data stored as Delta Lake format to support ACID, Merge and many other Data Lake features. 
 - Relations in the Model are enforced during the data processing
 
-<<<attach model here>>>
+![integration_layer_data_model](https://user-images.githubusercontent.com/20134836/85896258-702d2280-b7f8-11ea-9385-9cb9374adb5a.png)
 
 
 Presentation Layer:-
@@ -63,7 +63,7 @@ Presentation Layer:-
 - Data stored as Delta Lake format to support ACID, Merge and many other Data Lake features. 
 - Model Node : the below model is just for the sake of demo and to have as much data transformation as possible, as source data is denormalized, i had to make a normalized model which does not conform completely with data lake concepts.
 
-<<<attach model here>>>
+![presentation_layer_model](https://user-images.githubusercontent.com/20134836/85896312-8a670080-b7f8-11ea-95df-beee5c718a3b.png)
 
 Data Pipelines:-
 ---------------------------
@@ -74,21 +74,21 @@ Three Airflow DAGs are developed to load data through the different layers of th
 - Loads the data from S3 bucket to the Landing zone on the EMR Cluster
 - Runs monthly & triggers load_integration_layer DAG
 
-<<attach DAG Image here>>
+![load_landing_zone](https://user-images.githubusercontent.com/20134836/85896388-a79bcf00-b7f8-11ea-9b8e-3558ca3c22bb.PNG)
 
 2- load_integration_layer : 
 - Loads the data to the Integration Layer on the EMR cluster, this layer is where all data cleaning data integration/delta load activities are performed with the same structure as the sources.
 - A data counting quality check is performed for all the tables in this layer, also NULLs check will be included in this DAG
 
-<<attach DAG Image here>>
-<<attach Counts image>>
+![load_integration_layer](https://user-images.githubusercontent.com/20134836/85896423-b8e4db80-b7f8-11ea-9c37-0fc67263307d.PNG)
+![il_check_counts](https://user-images.githubusercontent.com/20134836/85896450-c732f780-b7f8-11ea-9d37-063e4d9492b8.PNG "il_check_counts")
 
 3- load_presentation_layer : 
 - loads the data to the Presentation Layer, Presentation Layer contains the required data structures/models to be consumed by other teams eg data analysts, data scientist & reporting
 - A data counting check & a NULLs check are added to the end of this DAG to warn in case of any data discrepancies
-<<attach DAG Image here>>
-<<attach Counts image>>
-<<attach Nulls image>>
+![load_presentation_layer](https://user-images.githubusercontent.com/20134836/85896474-d3b75000-b7f8-11ea-9892-01c1b74a0456.PNG)
+![check_pl_counts](https://user-images.githubusercontent.com/20134836/85896500-e03ba880-b7f8-11ea-8b01-199a68666f78.PNG "check_pl_counts")
+![flights_count_nulls](https://user-images.githubusercontent.com/20134836/85896534-eb8ed400-b7f8-11ea-859e-de2fe035532b.PNG "flights_count_nulls")
 
 Environment Setup:-
 ------------------
@@ -102,7 +102,7 @@ To be able to execute the DAG a machine with Airflow installed and some defined 
 - export EC2_VPC_SUBNET=<<Security group's vpc subnet>>
 - Warning, delta-core_2.11-0.6.1.jar needs to be uploaded to "s3://<<S3 Bucket name>>/BOOTSTRAP_ACTIONS/" before executing the DAG, this step will be added in the DAG the next version
 
-<<attach setup_aws_environement DAG here>>
+![setup_cloud_environment](https://user-images.githubusercontent.com/20134836/85896551-f5183c00-b7f8-11ea-96a3-7aa1dc99e9ab.PNG)
 
 
 # Improvements (in progress):-
