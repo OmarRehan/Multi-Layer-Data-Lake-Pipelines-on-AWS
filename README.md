@@ -44,7 +44,6 @@ Landing Zone:-
 - Accepts all HDFS supported files formats.
 - Relations in the Model are not enforced as these are just files, it is just to depict how to integrate the data together.
 
-<<<attach model here>>>
 
 Integration Layer:-
 -------------
@@ -102,28 +101,29 @@ To be able to execute the DAG a machine with Airflow installed and some defined 
 - export AWS_SECRET_ACCESS_KEY=<<AWS secret key should be defined>>
 - export EC2_KEY_NAME=<<EC2 key name>>
 - export EC2_VPC_SUBNET=<<Security group's vpc subnet>>
-- Warning, delta-core_2.11-0.6.1.jar needs to be uploaded to "s3://<<S3 Bucket name>>/BOOTSTRAP_ACTIONS/" before executing the DAG, this step will be added in the DAG the next version
+- Warning, delta-core_2.11-0.6.1.jar needs to be uploaded to "s3://"""S3 Bucket name"""/BOOTSTRAP_ACTIONS/" before executing the DAG, this step will be added in the DAG the next version
 
 ![setup_cloud_environment](https://user-images.githubusercontent.com/20134836/85896551-f5183c00-b7f8-11ea-96a3-7aa1dc99e9ab.PNG)
 
 
 # Improvements (in progress):-
 -----------------------
-system Improvements:
+- System Improvements:
 
-- provision an EC2 instance to be a central node accessible for team members and manages airflow 
-- Provision a MySQL db to be be the metastore for Spark and Airflow
+    - provision an EC2 instance to be a central node accessible for team members and manages airflow 
+    - Provision a MySQL db to be be the metastore for Spark and Airflow
 
-Data Management Improvements:
+- Data Management Improvements:
 
-- implement a Retention Plan
-- Automate the process of uploading the data on S3
-- Create a Raw zone with no defined schema to have schema on read advantage in case of changes structures of any tables
-- use copy command to load the data on the Raw zone from S3
+    - implement a Retention Plan
+    - Automate the process of uploading the data on S3
+    - Create a Raw zone with no defined schema to have schema on read advantage in case of changes structures of any tables
+    - use copy command to load the data on the Raw zone from S3
 
 
-Development Improvements:
-- Consolidate all repetitive queries into spark handler class, (Db creation and drop)
-- Create a drop table function in IL & PL to delete HDFS Directory and drop table in SPARK SQL
-- Raise exception in case of and error in all load functions to mark airflow task as failed
-- Include Null checks in Integration Layer DAG
+- Development Improvements:
+
+    - Consolidate all repetitive queries into spark handler class, (Db creation and drop)
+    - Create a drop table function in IL & PL to delete HDFS Directory and drop table in SPARK SQL
+    - Raise exception in case of and error in all load functions to mark airflow task as failed
+    - Include Null checks in Integration Layer DAG
