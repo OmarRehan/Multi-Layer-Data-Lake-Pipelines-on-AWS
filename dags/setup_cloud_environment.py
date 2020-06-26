@@ -71,6 +71,8 @@ with DAG('setup_cloud_environment',
         python_callable=create_s3_directories.create_s3_directories
     )
 
+    # TODO : create a task to upload delta-core_2.11-0.6.1.jar to s3://flights-dl-edge-node/BOOTSTRAP_ACTIONS/delta-core_2.11-0.6.1.jar
+
     task_create_emr_cluster = PythonOperator(
         task_id='iac_create_emr_cluster',
         python_callable=iac_create_emr_cluster.iac_create_emr_cluster
