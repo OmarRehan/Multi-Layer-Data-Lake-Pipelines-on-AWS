@@ -1,14 +1,14 @@
-Project Summary:-
+# Project Summary:-
 -----------------
 The Objective of this project it to create a multi-layer, scalable & accessible Data Lake, to store & process big amounts to be a unified data source, that can be used by data analytics, reporting & data science teams.
 The current demo is to handle data life cycle of USA flights through the different layers of the data lake.
 
-Data Sources:-
+# Data Sources:-
 -----------------
 - USA flights data from 'bureau of transportation statistics' : https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236 , the avaerage records count for each month is 500k to 650k, for this project i loaded the whole data with all the columns of 2019 
 - USA City Demographics : https://public.opendatasoft.com/explore/dataset/us-cities-demographics/export/ .
 
-System Components :-
+# System Components :-
 ------------------------
 ![system_compnents](https://user-images.githubusercontent.com/20134836/85896142-3f4ced80-b7f8-11ea-8800-955e6c52f7a3.png)
 - Delta Lake :-
@@ -25,7 +25,7 @@ System Components :-
 - Apache Airflow :-
     - Airflow acts as the main orchestration tool for the data lake as it provides many required features for the current scope eg: back filling, web UI, scheduling, etc...
     
-Data Layers, Models & Loading Strategies:-
+# Data Layers, Models & Loading Strategies:-
 ------------------
 S3 Bucket:
 ---------
@@ -65,18 +65,19 @@ Presentation Layer:-
 
 ![presentation_layer_model](https://user-images.githubusercontent.com/20134836/85896312-8a670080-b7f8-11ea-95df-beee5c718a3b.png)
 
-Data Pipelines:-
+# Data Pipelines:-
 ---------------------------
 Three Airflow DAGs are developed to load data through the different layers of the Data Lake:-
 
 1- load_landing_zone : 
-
+------------------------------
 - Loads the data from S3 bucket to the Landing zone on the EMR Cluster
 - Runs monthly & triggers load_integration_layer DAG
 
 ![load_landing_zone](https://user-images.githubusercontent.com/20134836/85896388-a79bcf00-b7f8-11ea-9b8e-3558ca3c22bb.PNG)
 
 2- load_integration_layer : 
+------------------------------
 - Loads the data to the Integration Layer on the EMR cluster, this layer is where all data cleaning data integration/delta load activities are performed with the same structure as the sources.
 - A data counting quality check is performed for all the tables in this layer, also NULLs check will be included in this DAG
 
@@ -84,13 +85,14 @@ Three Airflow DAGs are developed to load data through the different layers of th
 ![il_check_counts](https://user-images.githubusercontent.com/20134836/85896450-c732f780-b7f8-11ea-9d37-063e4d9492b8.PNG "il_check_counts")
 
 3- load_presentation_layer : 
+------------------------------
 - loads the data to the Presentation Layer, Presentation Layer contains the required data structures/models to be consumed by other teams eg data analysts, data scientist & reporting
 - A data counting check & a NULLs check are added to the end of this DAG to warn in case of any data discrepancies
 ![load_presentation_layer](https://user-images.githubusercontent.com/20134836/85896474-d3b75000-b7f8-11ea-9892-01c1b74a0456.PNG)
 ![check_pl_counts](https://user-images.githubusercontent.com/20134836/85896500-e03ba880-b7f8-11ea-8b01-199a68666f78.PNG "check_pl_counts")
 ![flights_count_nulls](https://user-images.githubusercontent.com/20134836/85896534-eb8ed400-b7f8-11ea-859e-de2fe035532b.PNG "flights_count_nulls")
 
-Environment Setup:-
+# Environment Setup:-
 ------------------
 An Airflow DAG (setup_cloud_environment.py) is developed to setup AWS environment, it creates S3 Bucket & Directories, start, configure EMR cluster and creates Spark SQL databases.
 
