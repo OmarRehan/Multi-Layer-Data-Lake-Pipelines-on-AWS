@@ -18,12 +18,14 @@ The current demo is to handle data life cycle of USA flights through the differe
 
 - AWS EMR:-
     - AWS EMR provides All tools needed for Percussing,Storage, Resource Management & Data Access tools as PAAS.
+    - it is scalable so in case of huge data needs to beloaded, its is to scale up and down, and accessible to all team members.
 
 - S3 :-
     - S3 is the current source of data, this is the first interaction with the data in the current scope, as Airflow DAGs will consume the data from it into the other layers in the data lake.
     
 - Apache Airflow :-
     - Airflow acts as the main orchestration tool for the data lake as it provides many required features for the current scope eg: back filling, web UI, scheduling, etc...
+    - The DAGs implemented will load the data monthly and backfill the data from 2019.
     
 # Data Layers, Models & Loading Strategies:-
 ------------------
