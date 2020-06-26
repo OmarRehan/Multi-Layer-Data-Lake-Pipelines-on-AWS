@@ -3,11 +3,12 @@ from datetime import datetime
 from airflow import DAG
 from airflow.contrib.hooks.ssh_hook import SSHHook
 from airflow.contrib.operators.ssh_operator import SSHOperator
+from airflow.operators.dagrun_operator import TriggerDagRunOperator
 from airflow.operators.dummy_operator import DummyOperator
 
 default_args = {
     'owner': 'flights_dl',
-    'depends_on_past': False,
+    'depends_on_past': True,
     'retries': 0,
     'catchup': False,
     'email_on_retry': False,
@@ -16,12 +17,13 @@ default_args = {
 
 default_spark_submit_cmd = """$SPARK_SUBMIT $FLIGHT_PROJECT_PATH/load_integration_layer/{script_name} --master yarn {args}"""
 
+
 with DAG('load_integration_layer',
          default_args=default_args,
          concurrency=32,
-         description='TBD',
+         description='loads all flights table in the integration layer, get triggered by the load_landing_zone DAG',
          schedule_interval=None,
-         start_date=datetime(2020, 4, 1)
+         start_date=datetime(2019, 1, 1)
          ) as main_dag:
     task_start_operator = DummyOperator(task_id='begin_execution')
 
@@ -181,6 +183,12 @@ with DAG('load_integration_layer',
 
     task_end_operator = DummyOperator(task_id='end_execution')
 
+    task_trigger_load_presentation_layer = TriggerDagRunOperator(
+        task_id="trigger_load_presentation_layer",
+        trigger_dag_id="load_presentation_layer",
+        execution_date="{{ execution_date }}"
+    )
+
     task_start_operator >> task_load_il_flights >> task_load_il_l_yesno_resp >> task_load_il_l_quarters >> task_check_il_counts
 
     task_start_operator >> task_load_il_city_demographics >> task_load_il_l_airline_id >> task_load_il_l_deparrblk >> task_load_il_l_world_area_codes >> task_load_il_l_weekdays >> task_load_il_l_diversions >> task_check_il_counts
@@ -189,4 +197,4 @@ with DAG('load_integration_layer',
 
     task_start_operator >> task_load_il_l_airport_seq_id >> task_load_il_l_cancellation >> task_load_il_l_months >> task_load_il_l_city_market >> task_load_il_l_ontime_delay_groups >> task_load_il_l_carrier_history >> task_check_il_counts
 
-    task_check_il_counts >> task_end_operator
+    task_check_il_counts >> task_end_operator >> task_trigger_load_presentation_layer

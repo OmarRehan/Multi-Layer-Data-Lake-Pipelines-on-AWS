@@ -4,7 +4,6 @@ from constants import dict_dbs_names
 
 
 def check_il_counts(spark, integration_layer_name):
-
     pd_df_counts = spark.sql(f"""
         SELECT 'CITY_DEMOGRAPHICS' ,COUNT(*) COUNT FROM {integration_layer_name}.CITY_DEMOGRAPHICS
         UNION
@@ -55,17 +54,12 @@ def check_il_counts(spark, integration_layer_name):
     if empty_tables_count > 0:
         raise Exception(f'{empty_tables_count} Tables are empty in Integration Layer\n{df_empty_tables.to_string()}')
     else:
-        logging.info('\n'+pd_df_counts.to_string())
+        logging.info('\n' + pd_df_counts.to_string())
 
 
 if __name__ == '__main__':
     spark = initialize_spark_session('check_il_counts')
     from delta.tables import *
 
-    try:
-        integration_layer_name = dict_dbs_names.get('INTEGRATION_LAYER')
-
-    except Exception as e:
-        logging.error('Failed to retrieve Environment variables')
-
+    integration_layer_name = dict_dbs_names.get('INTEGRATION_LAYER_NAME')
     check_il_counts(spark, integration_layer_name)

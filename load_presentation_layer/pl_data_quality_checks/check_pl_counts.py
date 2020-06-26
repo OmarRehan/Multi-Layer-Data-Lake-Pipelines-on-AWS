@@ -39,7 +39,7 @@ if __name__ == '__main__':
     from delta.tables import *
 
     try:
-        presentation_layer_name = dict_dbs_names.get('PRESENTATION_LAYER')
+        presentation_layer_name = dict_dbs_names.get('PRESENTATION_LAYER_NAME')
 
     except Exception as e:
         logging.error('Failed to retrieve Environment variables')

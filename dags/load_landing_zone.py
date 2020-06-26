@@ -3,13 +3,14 @@ from datetime import datetime
 from airflow import DAG
 from airflow.contrib.hooks.ssh_hook import SSHHook
 from airflow.contrib.operators.ssh_operator import SSHOperator
+from airflow.operators.dagrun_operator import TriggerDagRunOperator
 from airflow.operators.dummy_operator import DummyOperator
 
 default_args = {
     'owner': 'flights_dl',
-    'depends_on_past': False,
+    'depends_on_past': True,
     'retries': 0,
-    'catchup': False,
+    'catchup': True,
     'email_on_retry': False,
     'concurrency': 3
 }
@@ -19,16 +20,17 @@ default_spark_submit_cmd = """$SPARK_SUBMIT $FLIGHT_PROJECT_PATH/load_landing_zo
 with DAG('load_landing_zone',
          default_args=default_args,
          concurrency=32,
-         description='TBD',
-         schedule_interval=None,
-         start_date=datetime(2020, 4, 1)
+         description='Loads all Flights tables in the Landing Zone, monthly schedule, it shoud start on the first day of a new month',
+         schedule_interval='@monthly',
+         start_date=datetime(2019, 1, 1)
          ) as main_dag:
     task_start_operator = DummyOperator(task_id='begin_execution')
 
     task_load_lz_flights = SSHOperator(
         task_id='load_lz_flights',
         ssh_hook=SSHHook(ssh_conn_id="ssh_default"),
-        command=default_spark_submit_cmd.format(script_name='load_lz_flights.py', args='yearmonth={{ macros.ds_format(ds_nodash,"%Y%m%d", "%Y%m") }}'),
+        command=default_spark_submit_cmd.format(script_name='load_lz_flights.py',
+                                                args='yearmonth={{ macros.ds_format(ds_nodash,"%Y%m%d", "%Y%m") }}'),
         trigger_rule='dummy'
     )
 
@@ -190,7 +192,13 @@ with DAG('load_landing_zone',
         trigger_rule='dummy'
     )
 
-    task_end_operator = DummyOperator(task_id='end_execution')
+    task_trigger_load_integration_layer = TriggerDagRunOperator(
+        task_id="trigger_load_integration_layer",
+        trigger_dag_id="load_integration_layer",
+        execution_date="{{ execution_date }}"
+    )
+
+    task_end_operator = DummyOperator(task_id='end_load_landing_zone')
 
     task_start_operator >> task_load_lz_flights >> task_load_lz_l_yesno_resp >> task_load_lz_l_quarters >> task_end_operator
 
@@ -199,3 +207,5 @@ with DAG('load_landing_zone',
     task_start_operator >> task_load_lz_l_state_fips >> task_load_lz_l_airport >> task_load_lz_l_airport_id >> task_load_lz_l_distance_group_250 >> task_load_lz_l_unique_carriers >> task_load_lz_l_state_abr_aviation >> task_end_operator
 
     task_start_operator >> task_load_lz_l_airport_seq_id >> task_load_lz_l_cancellation >> task_load_lz_l_months >> task_load_lz_l_city_market_id >> task_load_lz_l_ontime_delay_groups >> task_load_lz_l_carrier_history >> task_end_operator
+
+    task_end_operator >> task_trigger_load_integration_layer

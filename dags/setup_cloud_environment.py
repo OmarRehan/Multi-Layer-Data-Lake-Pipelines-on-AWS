@@ -14,6 +14,13 @@ import os
 
 
 def update_cluster_connection(**kwargs):
+
+    """
+    Updates the ssh_default connection of the EMR cluster after creating a new one using setup_cloud_environment
+    :param kwargs:
+    :return:
+    """
+
     ti = kwargs['ti']
 
     emr_dns = ti.xcom_pull(task_ids='iac_create_emr_cluster')
@@ -30,7 +37,7 @@ ssh_emr_host = BaseHook.get_connection('ssh_default').host
 ssh_emr_key = BaseHook.get_connection('ssh_default').extra_dejson.get('key_file')
 ssh_emr_user = BaseHook.get_connection('ssh_default').login
 files_to_upload = '{constants.py,create_integration_layer.py,create_landing_zone.py,create_presentation_layer.py,' \
-                  'helper_functions,load_integration_layer,load_landing_zone,load_presentation_layer,sql_queries}'
+                  'helper_functions,load_integration_layer,load_landing_zone,load_presentation_layer,sql_queries,quality_checks}'
 
 spark_master = 'yarn'
 
