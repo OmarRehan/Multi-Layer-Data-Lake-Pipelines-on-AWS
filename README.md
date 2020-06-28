@@ -89,8 +89,8 @@ Three Airflow DAGs are developed to load data through the different layers of th
 ------------------------------
 - loads the data to the Presentation Layer, Presentation Layer contains the required data structures/models to be consumed by other teams eg data analysts, data scientist & reporting
 - A data counting check & a NULLs check are added to the end of this DAG to warn in case of any data discrepancies
+
 ![load_presentation_layer](https://user-images.githubusercontent.com/20134836/85896474-d3b75000-b7f8-11ea-9892-01c1b74a0456.PNG)
-![check_pl_counts](https://user-images.githubusercontent.com/20134836/85896500-e03ba880-b7f8-11ea-8b01-199a68666f78.PNG "check_pl_counts")
 ![flights_count_nulls](https://user-images.githubusercontent.com/20134836/85896534-eb8ed400-b7f8-11ea-859e-de2fe035532b.PNG "flights_count_nulls")
 
 # Environment Setup:-
