@@ -6,23 +6,23 @@ from constants import dict_dbs_names
 def check_pl_counts(spark, presentation_layer_name):
 
     pd_df_counts = spark.sql(f"""
-        SELECT 'CITY_DEMOGRAPHICS' ,COUNT(*) COUNT FROM {presentation_layer_name}.CALENDAR
+        SELECT 'CALENDAR' ,COUNT(*) COUNT FROM {presentation_layer_name}.CALENDAR
         UNION
         SELECT 'FLIGHTS' ,COUNT(*) COUNT FROM {presentation_layer_name}.FLIGHTS
         UNION
-        SELECT 'L_AIRLINE_ID',COUNT(*) COUNT FROM {presentation_layer_name}.CANCELLATION
+        SELECT 'CANCELLATION',COUNT(*) COUNT FROM {presentation_layer_name}.CANCELLATION
         UNION
-        SELECT 'L_AIRPORT',COUNT(*) COUNT FROM {presentation_layer_name}.WORLD_AREA_CODES
+        SELECT 'WORLD_AREA_CODES',COUNT(*) COUNT FROM {presentation_layer_name}.WORLD_AREA_CODES
         UNION 
-        SELECT 'L_AIRPORT_ID',COUNT(*) COUNT FROM {presentation_layer_name}.STATE
+        SELECT 'STATE',COUNT(*) COUNT FROM {presentation_layer_name}.STATE
         UNION
-        SELECT 'L_AIRPORT_SEQ_ID',COUNT(*) COUNT FROM {presentation_layer_name}.CITY
+        SELECT 'CITY',COUNT(*) COUNT FROM {presentation_layer_name}.CITY
         UNION
-        SELECT 'L_CANCELLATION',COUNT(*) COUNT FROM {presentation_layer_name}.AIRPORT
+        SELECT 'AIRPORT',COUNT(*) COUNT FROM {presentation_layer_name}.AIRPORT
         UNION
-        SELECT 'L_CARRIER_HISTORY',COUNT(*) COUNT FROM {presentation_layer_name}.AIRLINE
+        SELECT 'AIRLINE',COUNT(*) COUNT FROM {presentation_layer_name}.AIRLINE
         UNION
-        SELECT 'L_CITY_MARKET_ID',COUNT(*) COUNT FROM {presentation_layer_name}.CITY_DEMOGRAPHICS
+        SELECT 'CITY_DEMOGRAPHICS',COUNT(*) COUNT FROM {presentation_layer_name}.CITY_DEMOGRAPHICS
     """).toPandas()
 
     df_empty_tables = pd_df_counts[pd_df_counts.COUNT == 0]
