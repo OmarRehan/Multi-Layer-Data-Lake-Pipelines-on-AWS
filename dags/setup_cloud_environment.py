@@ -2,7 +2,6 @@ from datetime import datetime
 from airflow import DAG
 from airflow.contrib.hooks.ssh_hook import SSHHook
 from airflow.contrib.operators.ssh_operator import SSHOperator
-from airflow.hooks.base_hook import BaseHook
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
 import constants
@@ -10,7 +9,6 @@ from helper_functions import create_s3_bucket, create_s3_directories, iac_create
 from airflow.operators.bash_operator import BashOperator
 from airflow.hooks.base_hook import BaseHook
 from airflow import settings
-import os
 
 
 def update_cluster_connection(**kwargs):
