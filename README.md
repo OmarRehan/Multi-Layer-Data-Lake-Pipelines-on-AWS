@@ -1,38 +1,38 @@
 # Project Summary:-
 -----------------
-The Objective of this project it to create a multi-layer, scalable & accessible Data Lake, to store & process big amounts to be a unified data source, that can be used by data analytics, reporting & data science teams.
-The current demo is to handle data life cycle of USA flights through the different layers of the data lake.
+The objective of this project is to create a multi-layer, scalable & accessible Data Lake, to store & process big amounts to be a unified data source, that can be used by data analytics, reporting & data science teams.
+The current demo is to handle the data life cycle of USA flights through the different layers of the data lake.
 
 # Data Sources:-
 -----------------
-- USA flights data from 'bureau of transportation statistics' : https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236 , the avaerage records count for each month is 500k to 650k, for this project i loaded the whole data with all the columns of 2019 
-- USA City Demographics : https://public.opendatasoft.com/explore/dataset/us-cities-demographics/export/ .
+- USA flights data from 'bureau of transportation statistics': https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236, the average records count for each month is 500k to 650k, for this project I loaded the whole data with all the columns of 2019 
+- USA City Demographics: https://public.opendatasoft.com/explore/dataset/us-cities-demographics/export/.
 
-# System Components :-
+# System Components:-
 ------------------------
 ![system_compnents](https://user-images.githubusercontent.com/20134836/85896142-3f4ced80-b7f8-11ea-8800-955e6c52f7a3.png)
-- Delta Lake :-
+- Delta Lake:-
     - provides ACID transactions, scalable metadata handling, and unifies streaming and batch data processing. 
-    - Also Delta Lake is fully compatible with Apache Spark APIs so users with different skills can use the data whether using SQL (Spark SQL),spark APIs ,python, R, etc...
-    - Delta Lake stores the data as parquet files, so data is still readable with all tools can read parquet like Hive 
+    - Also Delta Lake is fully compatible with Apache Spark APIs so users with different skills can use the data whether using SQL (Spark SQL), spark APIs, python, R, etc...
+    - Delta Lake stores the data as Parquet files, so data is still readable with all tools can read parquet like Hive 
 
 - AWS EMR:-
-    - AWS EMR provides All tools needed for Percussing,Storage, Resource Management & Data Access tools as PAAS.
-    - it is scalable so in case of huge data needs to beloaded, its is to scale up and down, and accessible to all team members.
+    - AWS EMR provides All tools needed for Processing, Storage, Resource Management & Data Access tools as PAAS.
+    - it is scalable so in case of huge data needs to be loaded, it is to scale up and down, and accessible to all team members.
 
-- S3 :-
+- S3:-
     - S3 is the current source of data, this is the first interaction with the data in the current scope, as Airflow DAGs will consume the data from it into the other layers in the data lake.
     
-- Apache Airflow :-
-    - Airflow acts as the main orchestration tool for the data lake as it provides many required features for the current scope eg: back filling, web UI, scheduling, etc...
+- Apache Airflow:-
+    - Airflow acts as the main orchestration tool for the data lake as it provides many required features for the current scope eg: backfilling, web UI, scheduling, etc...
     - The DAGs implemented will load the data monthly and backfill the data from 2019.
     
 # Data Layers, Models & Loading Strategies:-
 ------------------
 S3 Bucket:
 ---------
-- Contains the files without any modifications except for non supported files formats.
-- The data uploaded manually for now, it will be automated but it is out f the current scope
+- Contains the files without any modifications except for non-supported file formats.
+- The data uploaded manually, for now, it will be automated but it is out f the current scope
 
 
 - The Storage Layer in the data lake is built using HDFS, It consists of 3 Separated data Layers.
@@ -41,17 +41,17 @@ S3 Bucket:
 Landing Zone:-
 -------------
 - Contains the most recent data from S3.
-- Initial & Incremental load are overwrite.
+- Initial & Incremental load are overwritten.
 - Contains the data as it is from the sources.
-- Accepts all HDFS supported files formats.
-- Relations in the Model are not enforced as these are just files, it is just to depict how to integrate the data together.
+- Accepts all HDFS supported file formats.
+- Relations in the Model are not enforced as these are just files, it is just to depict how to integrate the data.
 
 
 Integration Layer:-
 -------------
 - Contains all the data from sources with the same structure as the sources but data is cleaned eg: handling missing data, data types are defined, enforcing the relations among the tables, etc...
-- Initial & Incremental load differs according to each table's type, for lookups/assets tables it is Merge/SCD1 handling, for transactional tables it is overwrite based on Airflow execution date so it deletes a specific partition if exists then inserts the data, each table's loading strategies is in the mapping sheet.
-- Data stored as Delta Lake format to support ACID, Merge and many other Data Lake features. 
+- Initial & Incremental load differs according to each table's type, for lookups/assets tables it is Merge/SCD1 handling, for transactional tables, it is overwrite based on Airflow execution date so it deletes a specific partition if exists then inserts the data, each table's loading strategies is in the mapping sheet.
+- Data stored as Delta Lake format to support ACID, Merge, and many other Data Lake features. 
 - Relations in the Model are enforced during the data processing
 
 ![integration_layer_data_model](https://user-images.githubusercontent.com/20134836/85896258-702d2280-b7f8-11ea-9385-9cb9374adb5a.png)
@@ -60,9 +60,9 @@ Integration Layer:-
 Presentation Layer:-
 -------------
 - This Layer contains models required by data analytics, reporting & data science teams so they can build models, derive insights & generate reports.
-- Initial & Incremental load differs according to each table's type, each table's loading strategies is in the mapping sheet.
-- Data stored as Delta Lake format to support ACID, Merge and many other Data Lake features. 
-- Model Node : the below model is just for the sake of demo and to have as much data transformation as possible, as source data is denormalized, i had to make a normalized model which does not conform completely with data lake concepts.
+- Initial & Incremental load differs according to each table's type, each table's loading strategies are in the mapping sheet.
+- Data stored as Delta Lake format to support ACID, Merge, and many other Data Lake features. 
+- Model Note: the below model is just for the sake of demo and to have as much data transformation as possible, as source data is denormalized, I had to make a normalized model which does not conform completely with data lake concepts.
 
 ![presentation_layer_model](https://user-images.githubusercontent.com/20134836/85896312-8a670080-b7f8-11ea-95df-beee5c718a3b.png)
 
@@ -72,7 +72,7 @@ Three Airflow DAGs are developed to load data through the different layers of th
 
 1- load_landing_zone : 
 ------------------------------
-- Loads the data from S3 bucket to the Landing zone on the EMR Cluster
+- Loads the data from the S3 bucket to the Landing Zone on the EMR Cluster
 - Runs monthly & triggers load_integration_layer DAG
 
 ![load_landing_zone](https://user-images.githubusercontent.com/20134836/85896388-a79bcf00-b7f8-11ea-9b8e-3558ca3c22bb.PNG)
@@ -95,7 +95,7 @@ Three Airflow DAGs are developed to load data through the different layers of th
 
 # Environment Setup:-
 ------------------
-An Airflow DAG (setup_cloud_environment.py) is developed to setup AWS environment, it creates S3 Bucket & Directories, start, configure EMR cluster and creates Spark SQL databases.
+An Airflow DAG (setup_cloud_environment.py) is developed to the setup AWS environment, it creates S3 Bucket & Directories, starts, configure EMR cluster, and creates Spark SQL databases.
 
 To be able to execute the DAG a machine with Airflow installed and some defined environment variables are required.
 
@@ -108,19 +108,19 @@ To be able to execute the DAG a machine with Airflow installed and some defined 
 ![setup_cloud_environment](https://user-images.githubusercontent.com/20134836/85896551-f5183c00-b7f8-11ea-96a3-7aa1dc99e9ab.PNG)
 
 
-# Improvements (in progress):-
+# Improvements:-
 -----------------------
 - System Improvements:
 
     - provision an EC2 instance to be a central node accessible for team members and manages airflow 
-    - Provision a MySQL db to be be the metastore for Spark and Airflow
+    - Provision a MySQL db to be the metastore for Spark and Airflow
 
 - Data Management Improvements:
 
     - implement a Retention Plan
     - Automate the process of uploading the data on S3
     - Create a Raw zone with no defined schema to have schema on read advantage in case of changes structures of any tables
-    - use copy command to load the data on the Raw zone from S3
+    - use the copy command to load the data on the Raw zone from S3
 
 
 - Development Improvements:
